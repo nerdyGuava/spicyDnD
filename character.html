@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Sheet - Dreadblood Vampire</title>
+    <title>Character Sheet - Fey & Whimsy</title>
     <style>
         :root {
-            --bg-color: #120c14;
-            --card-bg: #1e1422;
-            --accent-color: #9d1a3c;
-            --text-color: #e2d7e5;
-            --text-muted: #a696ad;
-            --success-color: #2e7d32;
-            --danger-color: #c62828;
+            --bg-gradient: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --accent-color: #d4a5b8;
+            --accent-hover: #b88399;
+            --text-color: #4a3b4e;
+            --text-muted: #7d6b83;
+            --tracker-bg: linear-gradient(135deg, #fff5f7 0%, #f6efff 100%);
+            --border-style: 1px solid #e1d3e8;
         }
 
         body {
             font-family: 'Georgia', serif;
-            background-color: var(--bg-color);
+            background: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -25,28 +27,37 @@
         }
 
         header {
-            background: linear-gradient(180deg, #000000, var(--bg-color));
-            padding: 2rem;
-            border-bottom: 2px solid var(--accent-color);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 1.5rem 2rem;
+            border-bottom: 2px dashed var(--accent-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 15px rgba(212, 165, 184, 0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
-            text-shadow: 0 0 10px var(--accent-color);
+            font-size: 1.8rem;
+            color: #72527a;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
         }
 
         .nav-link {
             color: var(--text-muted);
             text-decoration: none;
             font-weight: bold;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
         }
 
         .nav-link:hover {
-            color: var(--text-color);
+            color: #72527a;
+            border-color: var(--accent-color);
         }
 
         .container {
@@ -66,49 +77,55 @@
 
         .sheet-section, .rules-sidebar {
             background-color: var(--card-bg);
-            border: 1px solid #34223b;
-            border-radius: 8px;
-            padding: 1.5rem;
+            border: var(--border-style);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(114, 82, 122, 0.05);
         }
 
-        .rules-sidebar h2 {
+        .rules-sidebar h2, .sheet-section h3 {
             margin-top: 0;
-            color: var(--text-color);
-            border-bottom: 1px solid var(--accent-color);
+            color: #72527a;
+            font-style: italic;
+            border-bottom: 2px dashed var(--accent-color);
             padding-bottom: 0.5rem;
         }
 
         .rule-box {
-            background-color: rgba(0, 0, 0, 0.3);
-            border-left: 3px solid var(--accent-color);
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            border-radius: 0 4px 4px 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-left: 4px solid var(--accent-color);
+            padding: 0.85rem 1.2rem;
+            margin-bottom: 1.2rem;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .rule-box strong {
-            color: #fff;
+            color: #5c4163;
             display: block;
             margin-bottom: 0.25rem;
+            font-style: italic;
         }
 
         .char-header {
-            display: flex;
-            gap: 1.5rem;
-            border-bottom: 1px solid #34223b;
+            border-bottom: 1px solid #ebdbe2;
             padding-bottom: 1rem;
             margin-bottom: 1.5rem;
         }
 
         .char-meta h2 {
             margin: 0;
-            color: #fff;
+            color: #5c4163;
+            font-size: 2.2rem;
+            font-weight: normal;
         }
 
         .char-meta p {
             margin: 0.25rem 0 0 0;
             color: var(--text-muted);
             font-style: italic;
+            font-size: 1.1rem;
         }
 
         .stats-grid {
@@ -119,73 +136,113 @@
         }
 
         .stat-card {
-            background-color: rgba(0, 0, 0, 0.2);
-            border: 1px solid #34223b;
-            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: var(--border-style);
+            border-radius: 12px;
             text-align: center;
-            padding: 0.75rem;
+            padding: 1rem;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.5);
         }
 
         .stat-name {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             color: var(--text-muted);
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
-        .stat-val {
-            font-size: 1.75rem;
+        .stat-val input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px dotted var(--accent-color);
+            color: #5c4163;
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
             font-weight: bold;
-            color: #fff;
-            margin: 0.25rem 0;
+            text-align: center;
+            width: 60px;
+            margin-top: 0.25rem;
+            outline: none;
         }
 
         .tracker-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .tracker {
-            background: linear-gradient(135deg, #25142a, #15091a);
-            border: 1px solid var(--accent-color);
-            border-radius: 6px;
-            padding: 1rem;
+            background: var(--tracker-bg);
+            border: 1px solid rgba(214, 165, 184, 0.4);
+            border-radius: 16px;
+            padding: 1.5rem;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(214, 165, 184, 0.05);
         }
 
         .tracker-title {
             font-weight: bold;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: #72527a;
+            font-style: italic;
         }
 
         .tracker-val {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
+            margin: 0.25rem 0;
+        }
+
+        .btn-adjust {
+            background: white;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+
+        .btn-adjust:hover {
+            background: var(--accent-color);
+            color: white;
         }
 
         .appearance-notes {
-            background-color: rgba(157, 26, 60, 0.05);
+            background-color: rgba(255, 255, 255, 0.5);
             border: 1px dashed var(--accent-color);
-            border-radius: 6px;
-            padding: 1rem;
-            margin-top: 1.5rem;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
         }
 
         .appearance-notes h3 {
             margin-top: 0;
-            font-size: 1.1rem;
-            color: #fff;
+            font-size: 1.2rem;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .appearance-notes ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .appearance-notes li {
+            margin-bottom: 0.75rem;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Campaign Chronicles</h1>
-        <a href="index.html" class="nav-link">&larr; Back to Dashboard</a>
+        <h1>Campaign Chronicles ✨</h1>
+        <a href="index.html" class="nav-link">&larr; Return to Dashboard</a>
     </header>
 
     <div class="container">
@@ -193,78 +250,84 @@
             <div class="char-header">
                 <div class="char-meta">
                     <h2>[Character Name]</h2>
-                    <p>Level 1 Dreadblood Vampire</p>
+                    <p>Level 1 Dreadblood Vampire (Fey-Touched Lineage)</p>
                 </div>
             </div>
 
             <div class="tracker-grid">
                 <div class="tracker">
-                    <div class="tracker-title" style="color: var(--text-color);">Current Arousal</div>
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.5rem 0;">
-                        <button onclick="adjustArousal(-1)" style="background: var(--card-bg); border: 1px solid var(--accent-color); color: white; border-radius: 4px; padding: 0.25rem 0.75rem; font-size: 1.2rem; cursor: pointer;">-</button>
-                        <div id="arousal-val" class="tracker-val" style="color: #ff6584; min-width: 60px;">0</div>
-                        <button onclick="adjustArousal(1)" style="background: var(--accent-color); border: none; color: white; border-radius: 4px; padding: 0.25rem 0.75rem; font-size: 1.2rem; cursor: pointer;">+</button>
+                    <div class="tracker-title">Current Arousal</div>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin: 0.5rem 0;">
+                        <button class="btn-adjust" onclick="adjustArousal(-1)">-</button>
+                        <div id="arousal-val" class="tracker-val" style="color: #c97d9e; min-width: 60px;">0</div>
+                        <button class="btn-adjust" onclick="adjustArousal(1)">+</button>
                     </div>
                     <small style="color: var(--text-muted);">Max Limit: <span id="arousal-max">12</span></small>
                 </div>
                 <div class="tracker">
-                    <div class="tracker-title" style="color: var(--text-color);">Defense Target</div>
-                    <div id="defense-val" class="tracker-val" style="color: #9d1a3c; margin: 0.5rem 0;">12</div>
+                    <div class="tracker-title">Defense Target</div>
+                    <div id="defense-val" class="tracker-val" style="color: #8c6b94; margin: 0.5rem 0;">12</div>
                     <small style="color: var(--text-muted);">Base AC + Inhibition</small>
                 </div>
             </div>
 
-            <h3>Core Stats</h3>
+            <h3>Attributes & Defenses</h3>
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-name">Base AC</div>
-                    <input type="number" id="stat-ac" value="10" onchange="updateDefense()" style="background: transparent; border: none; border-bottom: 1px dashed var(--accent-color); color: white; font-size: 1.75rem; font-weight: bold; text-align: center; width: 60px; margin-top: 0.25rem;">
+                    <div class="stat-val">
+                        <input type="number" id="stat-ac" value="10" onchange="updateDefense()">
+                    </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-name">Inhibition</div>
-                    <input type="number" id="stat-inhibition" value="2" onchange="updateDefense()" style="background: transparent; border: none; border-bottom: 1px dashed var(--accent-color); color: white; font-size: 1.75rem; font-weight: bold; text-align: center; width: 60px; margin-top: 0.25rem;">
+                    <div class="stat-val">
+                        <input type="number" id="stat-inhibition" value="2" onchange="updateDefense()">
+                    </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-name">Charisma</div>
-                    <input type="number" id="stat-charisma" value="3" style="background: transparent; border: none; border-bottom: 1px dashed var(--accent-color); color: white; font-size: 1.75rem; font-weight: bold; text-align: center; width: 60px; margin-top: 0.25rem;">
+                    <div class="stat-val">
+                        <input type="number" id="stat-charisma" value="3">
+                    </div>
                 </div>
             </div>
 
             <div class="appearance-notes">
-                <h3>Blood & Sensation Notes</h3>
+                <h3>Vampiric Grace & Sensation</h3>
                 <ul>
-                    <li><strong>The Hair Tells a Story:</strong> When well-fed on carnal energy or blood, your hair blooms a vivid <strong>scarlet</strong>. When starving or laying low, it fades to a lifeless <strong>bone-white</strong>.</li>
-                    <li><strong>Missing Humanity:</strong> Think about what piece of your former mortal self is completely gone. Do you struggle with physical empathy, or perhaps you can no longer read standard facial cues?</li>
-                    <li><strong>Social Standing:</strong> You belong to a heavily hunted lineage. Always keep an eye out for rare hidden havens or underground trades where your true nature is accepted as currency.</li>
+                    <li><strong>The Hair Tells a Story:</strong> When well-fed on whimsical energies, your hair blooms into a rich, glowing <strong>scarlet</strong>. When starved or layout low, it fades to a mist-like <strong>bone-white</strong>.</li>
+                    <li><strong>Missing Humanity:</strong> What piece of your mortal reflection did the fey wild slip away from you? Perhaps you no longer register thermal warmth, or can't comprehend mortal deceit.</li>
+                    <li><strong>Social Standing:</strong> Your mystical, forbidden heritage is hidden away from standard eyes. Seek out hidden glades or twilight markets where blood or raw passion is bartered openly like gold.</li>
                 </ul>
             </div>
         </main>
 
         <aside class="rules-sidebar">
-            <h2>System Reference</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">Quick cheat sheet for resolving encounters during our sessions.</p>
+            <h2>Chamber Rules</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">Quick reference for resolving romantic or alluring encounters.</p>
 
             <div class="rule-box">
                 <strong>🔄 Reverse Hit Points (Arousal)</strong>
-                Instead of losing HP down to 0, your Arousal starts at 0 and climbs up. Your "Arousal Maximum" is the breaking point of pleasure your character can take before losing control.
+                Instead of dropping down to zero health, your score starts at 0 and goes up. The Arousal Maximum is how much sensory pleasure you can maintain before losing composure.
             </div>
 
             <div class="rule-box">
-                <strong>⚔️ Sexual Damage (Stimulation)</strong>
-                Instead of using physical weapons to slash or pierce, attacks are made via Sexual Advances (sensory words, spellcasting, or suggestive touch). Success deals Stimulation, raising the target's Arousal.
+                <strong>⚔️ Flirtatious Damage (Stimulation)</strong>
+                Instead of physical weapons, checks are delivered via sensory words, spellcasting magic, or subtle touch. Success increases the target's total Arousal.
             </div>
 
             <div class="rule-box">
-                <strong>🛡️ The New Armor (AC + Inhibition)</strong>
-                To see if a seductive or sensory advance successfully lands, the attacker rolls a d20 against the target's <em>Armor Class (AC) + Inhibition</em> (their raw mental fortitude to stay collected).
+                <strong>🛡️ Composure (AC + Inhibition)</strong>
+                To successfully bypass a target's mental defenses with an advance, roll a d20 against their <em>Armor Class (AC) + Inhibition</em> modifier.
             </div>
 
             <div class="rule-box">
                 <strong>⚠️ Edging & Climaxing</strong>
-                If your Arousal hits its maximum, you gain the <strong>Edging</strong> condition. At the start of your turn, roll a d20 + Inhibition:
-                <ul style="margin: 0.5rem 0 0 0; padding-left: 1.25rem; font-size: 0.9rem;">
-                    <li style="color: #81c784;">3 Successes (15+): You stabilize and calm down.</li>
-                    <li style="color: #e57373;">3 Failures: You Climax and become incapacitated for a brief period while recovering.</li>
+                Reaching max Arousal triggers the <strong>Edging</strong> state. At the start of your turn, roll a d20 + Inhibition:
+                <ul style="margin: 0.5rem 0 0 0; padding-left: 1.25rem; font-size: 0.9rem; color: var(--text-muted);">
+                    <li><strong style="display:inline; color: #5a9463;">3 Successes (15+):</strong> You regain focus and settle down.</li>
+                    <li><strong style="display:inline; color: #b55a6d;">3 Failures:</strong> You Climax, leaving you beautifully incapacitated for a brief moment.</li>
                 </ul>
             </div>
         </aside>
@@ -272,25 +335,22 @@
 
     <script>
         let currentArousal = 0;
-        let arousalMax = 12; // Adjusted threshold for level 1 tracking
+        let arousalMax = 12;
 
         function adjustArousal(amount) {
             currentArousal += amount;
             
-            // Prevent arousal from going below 0
             if (currentArousal < 0) currentArousal = 0;
             
-            // Alert if she hits her maximum and gains the Edging condition
             if (currentArousal >= arousalMax) {
                 currentArousal = arousalMax;
-                alert("⚠️ Maximum Arousal reached! Character has gained the EDGING condition. Time to roll saving throws!");
+                alert("✨ Maximum Arousal reached! The character enters the EDGING state. Time to roll your saving throws!");
             }
             
             document.getElementById('arousal-val').innerText = currentArousal;
         }
 
         function updateDefense() {
-            // Automatically recalculate the defense target when you tweak AC or Inhibition
             const ac = parseInt(document.getElementById('stat-ac').value) || 0;
             const inhibition = parseInt(document.getElementById('stat-inhibition').value) || 0;
             const totalDefense = ac + inhibition;
@@ -298,7 +358,6 @@
             document.getElementById('defense-val').innerText = totalDefense;
         }
 
-        // Run once on load to set the initial defense target correctly
         window.onload = updateDefense;
     </script>
 
