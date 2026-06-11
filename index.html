@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Chronicles</title>
+    <style>
+        :root {
+            --bg-color: #120c14;
+            --card-bg: #1e1422;
+            --accent-color: #9d1a3c;
+            --text-color: #e2d7e5;
+            --text-muted: #a696ad;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(180deg, #000000, var(--bg-color));
+            text-align: center;
+            padding: 4rem 2rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: var(--text-color);
+            text-shadow: 0 0 10px var(--accent-color);
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #34223b;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4rem;
+            border-top: 1px solid #25182a;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: #b82348;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Chronicles of [Campaign Name]</h1>
+        <p>A Dungeons & Dragons Adventure Like No Other</p>
+    </header>
+
+    <main>
+        <section class="intro-section">
+            <h2>Welcome, Adventurers</h2>
+            <p>This is the official hub for our upcoming campaign. Here you will find world lore, character details, house rules, and scheduling info. Prepare yourselves for a tale of high stakes, deep secrets, and perilous desires.</p>
+        </section>
+
+        <section class="grid">
+            <div class="card">
+                <h2>The World</h2>
+                <p>Explore the lore, geography, and factions of our setting. Discover the forces shaping the realm.</p>
+                <a href="#" class="btn">Explore Lore</a>
+            </div>
+
+            <div class="card">
+                <h2>The Party</h2>
+                <p>Meet the characters braving the wilds. Track player bios, bonds, and shared inventory.</p>
+                <a href="#" class="btn">View Heroes</a>
+            </div>
+
+            <div class="card">
+                <h2>House Rules & Lines</h2>
+                <p>Essential mechanics, homebrew systems, and safety tools ensuring everyone has a great time.</p>
+                <a href="#" class="btn">Read Rules</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Campaign Hub. Handcrafted for the table.</p>
+    </footer>
+
+</body>
+</html>
